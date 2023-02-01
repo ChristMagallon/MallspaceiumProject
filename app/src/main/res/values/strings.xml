@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Mallspaceium</string>
+
+    <!--My Custom Strings-->
+    <string name="terms_policy">By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS Notifications from us and can opt out any time.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="featured_locations_desc">Here are some of the locations that are featured in your area, you might check it out!</string>
+
+    <!--Mallspaceium Floors-->
+    <string name="ground_floor_location">GroundFloor, Mallspaceium</string>
+    <string name="second_floor_location">Second Floor, Mallspaceium</string>
+    <string name="third_floor_location">Third Floor, Mallspaceium</string>
+    <string name="fourth_floor_location">Fourth Floor, Mallspaceium</string>
+
+    <!--Products Description-->
+    <string name="product1_desc">Round-necked T-shirt in soft cotton jersey with a motif on the front.</string>
+    <string name="product2_desc">Crew-neck shirt in soft jersey with a printed design. Long sleeves and ribbing at neckline and cuffs.</string>
+    <string name="product3_desc">Long sleeve hoodie in sweat fabric with a design. Features a jersey lined, drawstring hood, a kangaroo pocket and ribbing at the cuffs and hem. Soft brushed inside.</string>
+
+    <!--Store Descriptions-->
+    <string name="hm_desc">Welcome to H&amp;M, your shopping destination for fashion online. We offer fashion and quality at the best price in a more sustainable way.</string>
+    <string name="nike_desc">Any Place. Any Time. Any Condition. Be Your Best Every Time With Nike Shoes And Clothing. Home Of Everything Nike. Shop The Latest Releases Today.</string>
+    <string name="hermes_desc">Discover all the collections of Hermès, fashion accessories, scarves and ties, belts and ready-to-wear, perfumes, watches and jewelry.</string>
+    <string name="skechers_desc">Lifestyle and athletic footwear and apparel for men, women, and kids filled with innovative comfort technologies.</string>
+    <string name="puma_desc">Run The Streets. Do You. Research and shop all the latest gear from the world of Fashion, Sport, and everywhere in between.</string>
+
+    <!--Top Products Name-->
+    <string name="top_product1_name">Adidas unveils Yu-Gi-Oh collection featuring Blue-Eyes White Dragon, Dark Magician sneakers</string>
+    <string name="top_product2_name">Men Supra Shoes Supra Footwear Skytop Supra Tk Society Vaider Supra Ayakkabı Supra Cruizer High</string>
+</resources>
