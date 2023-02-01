@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1085603029968",
+    "project_id": "mallspaceium",
+    "storage_bucket": "mallspaceium.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085603029968:android:333dbf7e765838e24a4fd5",
+        "android_client_info": {
+          "package_name": "com.example.mallspaceium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085603029968-hdk8g1p7bttt9itp48fomsf5s4n8qlf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIibfcP5vD2UFWZyKO_AXAxVnn1tPb8Pc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085603029968-03n9t8hesf84g30h8s10bv6n3bmj48d4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
