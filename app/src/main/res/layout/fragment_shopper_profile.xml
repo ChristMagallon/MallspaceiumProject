@@ -57,7 +57,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView37"
+                android:id="@+id/profilename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -67,14 +67,14 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView38"
+                android:id="@+id/profileemail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="venncenzo.c@gmail.com"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/textView46"
+                android:id="@+id/profilephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="09333362064"
@@ -565,6 +565,53 @@
                                 android:layout_alignParentRight="true"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_arrow_forward"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/HelpImageView"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_help" />
+
+                            <TextView
+                                android:id="@+id/textView52"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="10dp"
+                                android:layout_toRightOf="@+id/HelpImageView"
+                                android:text="Logout"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_arrow_forward" />
 
                         </RelativeLayout>
 

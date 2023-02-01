@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -35,7 +37,8 @@ public class ShopperSignin extends AppCompatActivity {
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
-    private GoogleSignInClient mGoogleSignInClient;
+    GoogleSignInClient mGoogleSignInClient;
+
 
     @Override
     public void onStart() {
@@ -88,16 +91,20 @@ public class ShopperSignin extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+
+
     }
 
     private void updateUI(FirebaseUser user) {
 
         if(user!=null)
         {
+            finish();
             String user_role = "Shopper";
             Intent i = new Intent(ShopperSignin.this, HomePage.class);
             i.putExtra("user_role", user_role);
             startActivity(i);
+            mGoogleSignInClient.signOut();
         }
 
 
