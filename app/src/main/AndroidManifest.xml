@@ -41,42 +41,42 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShopOwnerSignin"
+            android:name=".shopowner.ShopOwnerSignin"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShopOwnerSignup"
+            android:name=".shopowner.ShopOwnerSignup"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShopOwnerSigninSignup"
+            android:name=".shopowner.ShopOwnerSigninSignup"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShopperSignin"
+            android:name=".shopper.ShopperSignin"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShopperSignup"
+            android:name=".shopper.ShopperSignup"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShopperSigninSignup"
+            android:name=".shopper.ShopperSigninSignup"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

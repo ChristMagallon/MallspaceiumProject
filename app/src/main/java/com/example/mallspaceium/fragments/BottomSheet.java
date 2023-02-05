@@ -1,7 +1,5 @@
-package com.example.mallspaceium;
+package com.example.mallspaceium.fragments;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,17 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.example.mallspaceium.R;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Location#newInstance} factory method to
+ * Use the {@link BottomSheet#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Location extends Fragment {
+public class BottomSheet extends BottomSheetDialogFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +27,7 @@ public class Location extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Location() {
+    public BottomSheet() {
         // Required empty public constructor
     }
 
@@ -40,11 +37,11 @@ public class Location extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Location.
+     * @return A new instance of fragment BottomSheet.
      */
     // TODO: Rename and change types and number of parameters
-    public static Location newInstance(String param1, String param2) {
-        Location fragment = new Location();
+    public static BottomSheet newInstance(String param1, String param2) {
+        BottomSheet fragment = new BottomSheet();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,22 +58,10 @@ public class Location extends Fragment {
         }
     }
 
-    private Button NavigateButton;
-    private BottomSheetDialog bottom_sheet_dialog;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_location, container, false);
-        /*to be fix
-        NavigateButton = view.findViewById(R.id.NavigateButton);
-        NavigateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
     }
 }

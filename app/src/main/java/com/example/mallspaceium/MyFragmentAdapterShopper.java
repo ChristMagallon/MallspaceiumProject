@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.mallspaceium.fragments.Location;
+import com.example.mallspaceium.fragments.Notification;
+import com.example.mallspaceium.fragments.ShopperHomepage;
+import com.example.mallspaceium.fragments.ShopperProfile;
+
 public class MyFragmentAdapterShopper extends FragmentStateAdapter {
 
     public MyFragmentAdapterShopper(@NonNull FragmentActivity fragmentActivity){

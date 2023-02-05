@@ -1,4 +1,4 @@
-package com.example.mallspaceium;
+package com.example.mallspaceium.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.mallspaceium.PopularShop;
+import com.example.mallspaceium.Product;
+import com.example.mallspaceium.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ShopOwnerHomepage#newInstance} factory method to
+ * Use the {@link ShopperHomepage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShopOwnerHomepage extends Fragment implements View.OnClickListener {
+public class ShopperHomepage extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +31,7 @@ public class ShopOwnerHomepage extends Fragment implements View.OnClickListener 
     private String mParam1;
     private String mParam2;
 
-    public ShopOwnerHomepage() {
+    public ShopperHomepage() {
         // Required empty public constructor
     }
 
@@ -37,11 +41,11 @@ public class ShopOwnerHomepage extends Fragment implements View.OnClickListener 
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopOwnerHomepage.
+     * @return A new instance of fragment ShopperHomepage.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShopOwnerHomepage newInstance(String param1, String param2) {
-        ShopOwnerHomepage fragment = new ShopOwnerHomepage();
+    public static ShopperHomepage newInstance(String param1, String param2) {
+        ShopperHomepage fragment = new ShopperHomepage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,13 +62,13 @@ public class ShopOwnerHomepage extends Fragment implements View.OnClickListener 
         }
     }
 
-    private CardView PopularShopsCardView, SalesDiscountsCardView, ProductsCardView, AdvertiseProductsCardView, PostSalesDiscountsCardView;
+    private CardView PopularShopsCardView, SalesDiscountsCardView, ProductsCardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_shop_owner_homepage, container, false);
+        View view = inflater.inflate(R.layout.fragment_shopper_homepage, container, false);
 
         PopularShopsCardView = view.findViewById(R.id.PopularShopsCardView);
         PopularShopsCardView.setOnClickListener(this);
@@ -75,17 +79,11 @@ public class ShopOwnerHomepage extends Fragment implements View.OnClickListener 
         ProductsCardView = view.findViewById(R.id.ProductsCardView);
         ProductsCardView.setOnClickListener(this);
 
-        AdvertiseProductsCardView = view.findViewById(R.id.AdvertiseProductsCardView);
-        AdvertiseProductsCardView.setOnClickListener(this);
-
-        PostSalesDiscountsCardView = view.findViewById(R.id.PostSalesDiscountsCardView);
-        PostSalesDiscountsCardView.setOnClickListener(this);
-
         return view;
     }
 
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View view){
+        switch(view.getId()){
             case R.id.PopularShopsCardView:
                 PopularShopsCardView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -99,7 +97,7 @@ public class ShopOwnerHomepage extends Fragment implements View.OnClickListener 
                 SalesDiscountsCardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getActivity(), "Sales & Discounts Activity is still undermaintenance", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Sales & Discounts Activity is still undermaintenance",Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
@@ -109,21 +107,6 @@ public class ShopOwnerHomepage extends Fragment implements View.OnClickListener 
                     public void onClick(View view) {
                         Intent i = new Intent(getActivity(), Product.class);
                         startActivity(i);
-                    }
-                });
-                break;
-            case R.id.PostSalesDiscountsCardView:
-                PostSalesDiscountsCardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(), "Post Sales & Discounts is still undermaintenance", Toast.LENGTH_LONG).show();
-                    }
-                });
-            case R.id.AdvertiseProductsCardView:
-                AdvertiseProductsCardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(), "Advertise Products is still undermaintenance", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;

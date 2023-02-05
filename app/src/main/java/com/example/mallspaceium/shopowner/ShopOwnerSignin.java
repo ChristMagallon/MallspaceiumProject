@@ -1,4 +1,4 @@
-package com.example.mallspaceium;
+package com.example.mallspaceium.shopowner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.mallspaceium.AccountRecovery;
+import com.example.mallspaceium.HomePage;
+import com.example.mallspaceium.R;
 
 public class ShopOwnerSignin extends AppCompatActivity {
 
