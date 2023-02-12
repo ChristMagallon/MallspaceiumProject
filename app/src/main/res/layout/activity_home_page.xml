@@ -10,7 +10,9 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/HomePageTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:tabIconTint="@color/custom_color_selector"
+        app:tabIndicatorColor="@color/sky_blue">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/HomeTabItem"

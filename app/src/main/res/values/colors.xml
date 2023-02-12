@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--custom colors-->
+    <color name="gray">#808080</color>
     <color name="light_gray">#E3E3E3</color>
     <color name="navy">#0A1172</color>
     <color name="blue">#3944BC</color>
@@ -16,4 +17,5 @@
     <color name="cerulean">#0492C2</color>
     <color name="baby_blue">#89CFF0</color>
     <color name="power_blue">#B0DFE5</color>
+
 </resources>

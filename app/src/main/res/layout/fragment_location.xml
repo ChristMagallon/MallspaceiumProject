@@ -43,13 +43,13 @@
         android:src="@drawable/navigation_sample" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button3"
+        android:id="@+id/BottomSheetButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:background="@drawable/cust_btn"
-        android:text="Navigate"
+        android:text="Navigation"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

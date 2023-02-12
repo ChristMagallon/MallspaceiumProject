@@ -1,13 +1,19 @@
 package com.example.mallspaceium.fragments;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.mallspaceium.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -59,22 +65,34 @@ public class Location extends Fragment {
         }
     }
 
-    private Button NavigateButton;
-    private BottomSheetDialog bottom_sheet_dialog;
+    private Button BottomSheetButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_location, container, false);
-        /*to be fix
-        NavigateButton = view.findViewById(R.id.NavigateButton);
-        NavigateButton.setOnClickListener(new View.OnClickListener() {
+
+        BottomSheetButton = view.findViewById(R.id.BottomSheetButton);
+        BottomSheetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showBottomDialog();
             }
-        });*/
+        });
+
         return view;
+    }
+
+    private void showBottomDialog(){
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_sheet_dialog);
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 }
