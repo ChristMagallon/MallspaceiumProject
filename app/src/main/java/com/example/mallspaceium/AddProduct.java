@@ -1,37 +1,32 @@
 package com.example.mallspaceium;
 
-import static android.graphics.Color.convert;
 
+
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-
-
 import android.graphics.Bitmap;
-
-
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-
-
 import android.provider.MediaStore;
-
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.io.ByteArrayOutputStream;
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,10 +36,35 @@ public class AddProduct extends AppCompatActivity {
     Button addbtn;
     TextView pname, pdescription, pprice, pimage;
     ImageView image;
-    Bitmap bitmap;
     FirebaseFirestore firestoredb = FirebaseFirestore.getInstance();
+    String encodeImage;
 
-
+    private String encodeImage(Bitmap bitmap){
+        int previewWidth = 150;
+        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getHeight();
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+    private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK){
+                    if(result.getData() != null){
+                        Uri imageUri = result.getData().getData();
+                        try{
+                            InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            image.setImageBitmap(bitmap);
+                            encodeImage = encodeImage(bitmap);
+                        }catch (FileNotFoundException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+    );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,48 +80,26 @@ public class AddProduct extends AppCompatActivity {
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                adddata();
-            }
+            public void onClick(View view) { adddatafirestore();}
         });
 
         pimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(camera, 1);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                pickImage.launch(intent);
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
-            bitmap = (Bitmap)data.getExtras().get("data");
-            image.setImageBitmap(bitmap);
-        }
-    }
-
-    public String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String temp = Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-    void adddata() {
-        String convertedimage = BitMapToString(bitmap);
-
-        // Create a new user with a first and last name
+    void adddatafirestore(){
         Map<String, Object> ProductName = new HashMap<>();
         ProductName.put("Product Name", pname.getText().toString());
         ProductName.put("Product Description", pdescription.getText().toString());
         ProductName.put("Product Price", pprice.getText().toString());
-        ProductName.put("Product Image", convertedimage);
+        ProductName.put("image", encodeImage);
 
-        // Add a new document with a generated ID
         firestoredb.collection("users")
                 .add(ProductName)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
