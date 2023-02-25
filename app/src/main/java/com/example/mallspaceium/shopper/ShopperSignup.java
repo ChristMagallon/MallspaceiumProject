@@ -31,6 +31,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,6 +48,7 @@ public class ShopperSignup extends AppCompatActivity {
 
     private TextInputLayout shopperFnameBox, shopperLnameBox, shopperDOBBox, shopperPhoneNumBox, shopperAddressBox, shopperEmailBox, shopperUnameBox, shopperPassBox, shopperConfirmPassBox;
     private TextInputEditText shopperFname, shopperLname, shopperDOB, shopperPhoneNum, shopperAddress, shopperEmail, shopperUname, shopperPass, shopperConfirmPass;
+    private TextView softKeyboard;
     private RadioGroup shopperGenderRadioGroup;
     private RadioButton shopperGenderRadioButton;
     private Button ShopperSignupButton;
@@ -59,6 +62,11 @@ public class ShopperSignup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopper_signup);
+
+        // hide the soft keyboard
+        softKeyboard = (TextView) findViewById(R.id.ShopperDOBInput);
+        softKeyboard.setInputType(InputType.TYPE_NULL);
+        softKeyboard.setKeyListener(null);
 
         // set helper text error for layout style outline box
         shopperFnameBox = (TextInputLayout) findViewById(R.id.ShopperFirstNameTextBox);
@@ -120,12 +128,12 @@ public class ShopperSignup extends AppCompatActivity {
 
         // register a new user with the following credentials
         Map<String, Object> shopper = new HashMap<>();
-        shopper.put("shopper_firstName", shopperFnameInput);
-        shopper.put("shopper_lastName", shopperLnameInput);
+        shopper.put("shopper_firstName", shopperFnameInput.substring(0, 1).toUpperCase() + shopperFnameInput.substring(1));
+        shopper.put("shopper_lastName", shopperLnameInput.substring(0, 1).toUpperCase() + shopperLnameInput.substring(1));
         shopper.put("shopper_birthdate", shopperDOBInput);
         shopper.put("shopper_gender", shopperGenderInput);
         shopper.put("shopper_phoneNumber", shopperPhoneNumInput);
-        shopper.put("shopper_address", shopperAddressInput);
+        shopper.put("shopper_address", shopperAddressInput.substring(0, 1).toUpperCase() + shopperAddressInput.substring(1));
         shopper.put("shopper_email", shopperEmailInput);
         shopper.put("shopper_username", shopperUnameInput);
         shopper.put("shopper_password", shopperPassInput);
@@ -153,15 +161,15 @@ public class ShopperSignup extends AppCompatActivity {
     public boolean validateRegisterShopper() {
         // validation patterns
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;
-        String passwordPattern = "^" +
-                //"(?=.*[0-9])" +         //at least 1 digit
-                //"(?=.*[a-z])" +         //at least 1 lower case letter
-                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+        /*String passwordPattern = "^" +
+                //"(?=.*[0-9])" +       //at least 1 digit
+                //"(?=.*[a-z])" +       //at least 1 lower case letter
+                //"(?=.*[A-Z])" +       //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +      //any letter
                 "(?=.*[@#$%^&+=])" +    //at least 1 special character
                 "(?=\\S+$)" +           //no white spaces
                 ".{4,}" +               //at least 4 characters
-                "$";
+                "$";*/
 
         // validate selected radio buttons from the radio group
         selectedRadioButtonID = shopperGenderRadioGroup.getCheckedRadioButtonId();
@@ -318,15 +326,9 @@ public class ShopperSignup extends AppCompatActivity {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
                 updateCalendar();
             }
         };
-
-        // hide the soft keyboard
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(shopperDOB.getWindowToken(), 0);
-
         new DatePickerDialog(ShopperSignup.this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
