@@ -28,4 +28,7 @@
     <!--Top Products Name-->
     <string name="top_product1_name">Adidas unveils Yu-Gi-Oh collection featuring Blue-Eyes White Dragon, Dark Magician sneakers</string>
     <string name="top_product2_name">Men Supra Shoes Supra Footwear Skytop Supra Tk Society Vaider Supra Ayakkabı Supra Cruizer High</string>
+
+    <!--Error Texts-->
+    <string name="required">Required</string>
 </resources>

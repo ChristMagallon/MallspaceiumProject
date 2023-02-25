@@ -41,7 +41,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:hint="First Name">
+                android:hint="First Name"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ShopperFirstNameInput"
@@ -60,7 +64,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:hint="Last Name">
+                android:hint="Last Name"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ShopperLastNameInput"
@@ -79,7 +87,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:hint="Date of Birth">
+                android:hint="Date of Birth"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ShopperDOBInput"
@@ -132,7 +144,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:hint="Phone Number">
+                android:hint="Phone Number"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ShopperPhoneNumInput"
@@ -152,7 +168,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:hint="Address">
+                android:hint="Address"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ShopperAddressInput"
@@ -171,7 +191,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:hint="Email">
+                android:hint="Email"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ShopperEmailInput"
@@ -191,7 +215,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:hint="Username">
+                android:hint="Username"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ShopperUsernameInput"
@@ -211,6 +239,10 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
                 android:hint="Password"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -232,6 +264,10 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
                 android:hint="Confirm Password"
+                app:boxStrokeColor="@color/sky_blue"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/red"
+                app:hintTextColor="@color/sky_blue"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
