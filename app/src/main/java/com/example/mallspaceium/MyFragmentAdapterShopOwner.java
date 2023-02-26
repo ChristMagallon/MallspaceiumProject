@@ -9,13 +9,15 @@ import com.example.mallspaceium.fragments.Location;
 import com.example.mallspaceium.fragments.Notification;
 import com.example.mallspaceium.fragments.ShopOwnerHomepage;
 import com.example.mallspaceium.fragments.ShopOwnerProfile;
-import com.example.mallspaceium.fragments.ShopperProfile;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MyFragmentAdapterShopOwner extends FragmentStateAdapter {
 
     public MyFragmentAdapterShopOwner(@NonNull FragmentActivity fragmentActivity){
         super(fragmentActivity);
     }
+
 
     @NonNull
     @Override

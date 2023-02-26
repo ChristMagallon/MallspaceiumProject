@@ -9,6 +9,8 @@ import com.example.mallspaceium.fragments.Location;
 import com.example.mallspaceium.fragments.Notification;
 import com.example.mallspaceium.fragments.ShopperHomepage;
 import com.example.mallspaceium.fragments.ShopperProfile;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MyFragmentAdapterShopper extends FragmentStateAdapter {
 

@@ -65,9 +65,14 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="5dp"
-            android:hint="Email">
+            android:hint="Email"
+            app:boxStrokeColor="@color/sky_blue"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:hintTextColor="@color/sky_blue">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ShopperEmailInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -85,9 +90,14 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="5dp"
             android:hint="Password"
+            app:boxStrokeColor="@color/sky_blue"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:hintTextColor="@color/sky_blue"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ShopperPasswordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

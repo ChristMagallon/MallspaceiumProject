@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mallspaceium.AccountRecovery;
 import com.example.mallspaceium.HomePage;
@@ -20,16 +23,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.regex.Pattern;
 
 public class ShopperSignin extends AppCompatActivity {
 
-    private Button ShopperSigninButton;
-    private TextView ShopperForgotPassTextView;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -40,6 +48,13 @@ public class ShopperSignin extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
 
+    private TextInputLayout shopperEmailBox, shopperPassBox;
+    private TextInputEditText shopperEmail, shopperPass;
+    private Button ShopperSigninButton;
+    private TextView ShopperForgotPassTextView;
+
+    public ShopperSignin() {
+    }
 
     @Override
     public void onStart() {
@@ -101,10 +116,6 @@ public class ShopperSignin extends AppCompatActivity {
         if(user!=null)
         {
             finish();
-            String user_role = "Shopper";
-            Intent i = new Intent(ShopperSignin.this, HomePage.class);
-            i.putExtra("user_role", user_role);
-            startActivity(i);
             mGoogleSignInClient.signOut();
         }
 
@@ -124,7 +135,16 @@ public class ShopperSignin extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
-        ShopperForgotPassTextView = findViewById(R.id.ShopperForgotPassTextView);
+        // set helper text error for layout style outline box
+        shopperEmailBox = (TextInputLayout) findViewById(R.id.ShopperEmailTextBox);
+        shopperPassBox = (TextInputLayout) findViewById(R.id.ShopperPasswordTextBox);
+
+        // get the input data from the views
+        shopperEmail = (TextInputEditText) findViewById(R.id.ShopperEmailInput);
+        shopperPass = (TextInputEditText) findViewById(R.id.ShopperPasswordInput);
+        ShopperForgotPassTextView = (TextView) findViewById(R.id.ShopperForgotPassTextView);
+        ShopperSigninButton = (Button) findViewById(R.id.ShopperSigninButton);
+
         ShopperForgotPassTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,12 +152,87 @@ public class ShopperSignin extends AppCompatActivity {
             }
         });
 
-        ShopperSigninButton = findViewById(R.id.ShopperSigninButton);
         ShopperSigninButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              signIn();
+              if(validateLoginShopper()){
+                  loginShopper();
+              }
             }
         });
+    }
+
+    // login a user with the following credentials such as email and password
+    public void loginShopper(){
+        String shopperEmailInput = shopperEmail.getText().toString();
+        String shopperPasswordInput = shopperPass.getText().toString();
+        String user_email = shopperEmailInput;
+        db.collection("SHOPPERREGISTER")
+                .whereEqualTo("shopper_email", shopperEmailInput)
+                .whereEqualTo("shopper_password", shopperPasswordInput)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (!querySnapshot.isEmpty()) {
+                                Intent i = new Intent(ShopperSignin.this, HomePage.class);
+                                i.putExtra("user_email", user_email);
+                                startActivity(i);
+                            } else {
+                                clearTextBox();
+                            }
+                        }else{
+                            Toast.makeText(ShopperSignin.this,"The email you entered isn’t connected to an account", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    public boolean validateLoginShopper(){
+        // validation patterns
+        Pattern emailPattern = Patterns.EMAIL_ADDRESS;
+
+        // check if all required fields are filled
+        if (shopperEmail.getText().toString().trim().isEmpty()) {
+            shopperEmailBox.setHelperText("Field can't be empty");
+            shopperEmailBox.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+            shopperEmailBox.setBoxStrokeColor(getResources().getColor(R.color.red));
+            return false;
+        } else if (!emailPattern.matcher(shopperEmail.getText().toString().trim()).matches()) {
+            shopperEmailBox.setHelperText("Invalid email");
+            shopperEmailBox.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+            shopperEmailBox.setBoxStrokeColor(getResources().getColor(R.color.red));
+            return false;
+        } else {
+            shopperEmailBox.setHelperText(null);
+            shopperEmailBox.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.sky_blue)));
+            shopperEmailBox.setBoxStrokeColor(getResources().getColor(R.color.sky_blue));
+        }
+
+        if (shopperPass.getText().toString().trim().isEmpty()) {
+            shopperPassBox.setHelperText("Field can't be empty");
+            shopperPassBox.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+            shopperPassBox.setBoxStrokeColor(getResources().getColor(R.color.red));
+            return false;
+        } else if (shopperPass.getText().toString().contains(" ")) {
+            shopperPassBox.setHelperText("Spaces are not allowed");
+            shopperPassBox.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+            shopperPassBox.setBoxStrokeColor(getResources().getColor(R.color.red));
+            return false;
+        } else {
+            shopperPassBox.setHelperText(null);
+            shopperPassBox.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.sky_blue)));
+            shopperPassBox.setBoxStrokeColor(getResources().getColor(R.color.sky_blue));
+        }
+
+        // if all validation checks pass, return true
+        return true;
+    }
+
+    // this will clear the password text box whenever a user failed to login their account
+    public void clearTextBox(){
+        shopperPass.setText(null);
     }
 }
