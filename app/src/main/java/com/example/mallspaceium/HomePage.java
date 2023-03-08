@@ -50,7 +50,8 @@ public class HomePage extends AppCompatActivity {
         HomePageTabLayout = findViewById(R.id.HomePageTabLayout);
         ViewPager2 = findViewById(R.id.ViewPager2);
 
-        searchUser();
+        searchUserShopper();
+        searchUserShopOwner();
 
         HomePageTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -79,7 +80,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     // this will search the user role
-    public void searchUser() {
+    public void searchUserShopper() {
         Intent intent = getIntent();
         String user_email = intent.getStringExtra("user_email");
 
@@ -94,11 +95,40 @@ public class HomePage extends AppCompatActivity {
                             if (document.exists()) {
                                 // store the name value in a local variable here
                                 user_role = document.getString("shopper_role");
-
                                 if (user_role.equals("Shopper")) {
                                     fragmentShopper(user_role);
                                 } else if (user_role.equals("ShopOwner")) {
-                                    fragmentShopowner(user_role);
+                                    fragmentShopOwner(user_role);
+                                }
+                            } else {
+                                Log.d("DEBUGG", "No such document");
+                            }
+                        } else {
+                            Log.d("DEBUGG", "Error getting document: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void searchUserShopOwner() {
+        Intent intent = getIntent();
+        String user_email = intent.getStringExtra("user_email");
+
+        db.collection("SHOPOWNERREGISTER")
+                .document(user_email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                // store the name value in a local variable here
+                                user_role = document.getString("shopper_role");
+                                if (user_role.equals("Shopper")) {
+                                    fragmentShopper(user_role);
+                                } else if (user_role.equals("ShopOwner")) {
+                                    fragmentShopOwner(user_role);
                                 }
                             } else {
                                 Log.d("DEBUGG", "No such document");
@@ -116,7 +146,7 @@ public class HomePage extends AppCompatActivity {
         ViewPager2.setAdapter(adapterShopper);
     }
 
-    public void fragmentShopowner(String user_role){
+    public void fragmentShopOwner(String user_role){
         Log.d("VALIDATE USER ROLE", user_role);
         adapterShopOwner = new MyFragmentAdapterShopOwner(this);
         ViewPager2.setAdapter(adapterShopOwner);
